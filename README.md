@@ -1,7 +1,7 @@
 # tekton-cli-install
 Installing the OpenShift Pipelines Operator using the CLI
 
-##Procedure
+## Procedure
 
 - Create a Subscription object YAML file to subscribe a namespace to the Red Hat OpenShift Pipelines Operator, for example, sub.yaml:
 
@@ -23,6 +23,6 @@ spec:
 -   Create the Subscription object:
 
 ```bash
-$ oc apply -f sub.yaml
+$ oc apply -f tekton-sub.yaml
 ```
 The Red Hat OpenShift Pipelines Operator is now installed in the default target namespace openshift-operators.
