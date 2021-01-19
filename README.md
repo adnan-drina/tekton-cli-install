@@ -1,6 +1,26 @@
 # tekton-cli-install
 Installing the OpenShift Pipelines Operator using the CLI
 
+Ensure that the pipeline operator exists in the channel catalog.
+```shell script
+oc get packagemanifests -n openshift-marketplace | grep pipelines
+```
+
+Query the available channels for pipeline operator
+```shell script
+oc get packagemanifest -o jsonpath='{range .status.channels[*]}{.name}{"\n"}{end}{"\n"}' -n openshift-marketplace openshift-pipelines-operator-rh
+```
+
+Discover whether the operator can be installed cluster-wide or in a single namespace
+```shell script
+oc get packagemanifest -o jsonpath='{range .status.channels[*]}{.name}{" => cluster-wide: "}{.currentCSVDesc.installModes[?(@.type=="AllNamespaces")].supported}{"\n"}{end}{"\n"}' -n openshift-marketplace openshift-pipelines-operator-rh
+```
+
+Check the pipeline operator information for additional details
+```shell script
+oc describe packagemanifests/openshift-pipelines-operator-rh -n openshift-marketplace
+```
+
 ## Procedure
 
 - Create a Subscription object YAML file to subscribe a namespace to the Red Hat OpenShift Pipelines Operator, for example, sub.yaml:
